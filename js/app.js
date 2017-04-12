@@ -5,7 +5,7 @@
 angular.module('NarrowItDownApp', [])
 .controller('NarrowItDownController', NarrowItDownController)
 .service('MenuSearchService', MenuSearchService)
-.directive('FoundItems', FoundItems)
+.directive('foundItems', foundItems)
 .constant('ApiBasePath', "https://davids-restaurant.herokuapp.com");
 
 
@@ -20,8 +20,8 @@ function NarrowItDownController (MenuSearchService){
 	//Get Matched items
 	//------------------------------------------	
 	menu.getMatchedMenuItems = function(){
-		if(vm.searchTerm === "") {
-	      promise.items=[];
+		if(menu.searchTerm === "") {
+	      menu.items=[];
 	      return;
 	    }
 		var promise = MenuSearchService.getMatchedMenuItems(menu.searchTerm);
@@ -59,7 +59,7 @@ function MenuSearchService($http, ApiBasePath) {
 
 		    // return matched items
 		    for (var i = 0; i < data.length; i++) {
-		    	if (items[i].description.toLowerCase().indexOf(searchTerm.toLowerCase()) >=0) {
+		    	if(items[i].description.toLowerCase().indexOf(searchTerm.toLowerCase()) >=0 ) {
 		    		foundItems.push(items[i]);
 		    	}
 		    }
@@ -73,7 +73,7 @@ function MenuSearchService($http, ApiBasePath) {
 
 //Found items directive
 //------------------------------------------------------------------
-function FoundItems() {
+function foundItems() {
 	var ddo = {
 		templateUrl: 'foundItems.html',
 		scope: {
@@ -81,7 +81,7 @@ function FoundItems() {
 			onRemove: '&'
 		},
 	    controller: FoundItemsDirectiveController,
-	    controllerAs: 'list',
+	    controllerAs: 'listctrl',
 	    bindToController: true
 	};
 
