@@ -1,5 +1,5 @@
-(function () {
-	
+(function() {
+
 'use strict';
 
 angular.module('NarrowItDownApp', [])
@@ -19,18 +19,19 @@ function NarrowItDownController (MenuSearchService){
 
 	//Get Matched items
 	//------------------------------------------	
-	menu.getMatchedMenuItems = function(){
-		if(menu.searchTerm === "") {
-	      menu.items=[];
-	      return;
-	    }
-		var promise = MenuSearchService.getMatchedMenuItems(menu.searchTerm);
-		promise.then( function(response){
-			menu.items = response;
-		}).catch(function (error) {
-	      console.log(error);
-	    })
-	}
+	menu.narrowsearch = function () {
+    if(menu.searchTerm === "") {
+      menu.items=[];
+      return;
+    }
+    var promise = MenuSearchService.getMatchedMenuItems(menu.searchTerm);
+    promise.then(function (response) {
+      menu.items = response;
+    })
+    .catch(function (error) {
+      console.log(error);
+    })
+  }
 	//------------------------------------------	
 
 	//Remove Item
@@ -74,18 +75,17 @@ function MenuSearchService($http, ApiBasePath) {
 //Found items directive
 //------------------------------------------------------------------
 function foundItems() {
-	var ddo = {
-		templateUrl: 'foundItems.html',
-		scope: {
-			found: '<',
-			onRemove: '&'
-		},
-	    controller: FoundItemsDirectiveController,
-	    controllerAs: 'listctrl',
-	    bindToController: true
-	};
-
-	return ddo;
+	 var ddo = {
+    templateUrl: 'foundItems.html',
+    scope: {
+      found: '<',
+      onRemove: '&'
+    },
+    controller: FoundItemsDirectiveController,
+    controllerAs: 'list',
+    bindToController: true
+  }
+  return ddo;
 }
 //------------------------------------------------------------------
 
@@ -93,13 +93,14 @@ function foundItems() {
 //Found items directive Controller
 //------------------------------------------------------------------
 function FoundItemsDirectiveController() {
-  var listctrl = this;
-  listctrl.isEmpty= function () {
-    return listctrl.found != undefined && listctrl.found.length === 0;
+   var list = this;
+
+  console.log(list);
+
+  list.isEmpty= function () {
+    return list.found != undefined && list.found.length === 0;
   }
 }
 //------------------------------------------------------------------
 
-})();
-
-
+}());
