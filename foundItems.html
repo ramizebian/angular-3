@@ -1,4 +1,4 @@
-<div id="foundItems" ng-if="foundItems.length > 0">
+<div id="foundItems">
   <table class="table">
     <tr>
       <th class="name">Item Name</th>
@@ -6,16 +6,16 @@
       <th class="description">Description</th>
       <th class="remove">Remove</th>
     </tr>
-    <tr ng-repeat="item in foundItems">
+    <tr ng-repeat="item in listctrl.found">
       <td>{{ item.name }}</td>
       <td>{{ item.short_name }}</td>
       <td>{{ item.description }}</td>
       <td>
-        <button class="btn btn-danger" ng-click="onRemove({index: $index})">
+        <button class="btn btn-danger" ng-click="listctrl.onRemove({index: $index})">
           Don't want this one!
         </button>
       </td>
     </tr>
   </table>
 </div>
-<div id="nothingFound" class="text-center alert alert-danger" ng-if="foundItems.length === 0">Nothing found.</div>
+<div id="nothingFound" class="text-center alert alert-danger" ng-if="listctrl.isEmpty()">Nothing found.</div>
