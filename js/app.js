@@ -20,7 +20,7 @@ function NarrowItDownController (MenuSearchService){
 
 	//Get Matched items
 	//------------------------------------------	
-	menu.narrowsearch = function () {
+	menu.narrowIt = function () {
     if(menu.searchTerm === "") {
       menu.items=[];
       return;
